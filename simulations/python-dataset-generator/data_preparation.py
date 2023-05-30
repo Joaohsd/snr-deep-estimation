@@ -9,6 +9,7 @@ y3 = np.loadtxt('dataset/measured_64qam.csv')
 y4 = np.loadtxt('dataset/measured_256qam.csv')
 
 n = len(y1)
+
 # No offset
 offset1 = y1[n-1] - 40
 offset2 = y2[n-1] - 40

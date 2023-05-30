@@ -24,13 +24,13 @@ if gpus:
 print (tf. test. is_gpu_available )
 
 # Preraring dataset
-X_l = np.loadtxt("dataset/adapted_16qam.csv")
+X_l = np.loadtxt("dataset/measured_16qam.csv")
 y_l = np.loadtxt("dataset/diff_16qam.csv")
 logdir = "logs/scalars/" + "16QAM"
 tensorboard_callback = keras.callbacks.TensorBoard(log_dir=logdir)
 
-X = X_l[200:800]
-y = y_l[200:800]
+X = X_l[300:800]
+y = y_l[300:800]
 
 # Data Scaling from 0 to 1, X and y originally have very different scales.
 X_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
@@ -46,7 +46,7 @@ model.add(Dense(1, kernel_initializer='uniform', activation='linear'))
 # Hidden layer j with 4 neurons plus activation layer.
 model.add(Dense(4, activation='linear'))
 # Hidden layer k with 4 neurons.
-model.add(Dense(4, activation='sigmoid'))
+model.add(Dense(6, activation='sigmoid'))
 # Output Layer.
 model.add(Dense(1))
 
@@ -56,7 +56,7 @@ model.compile(loss='mse', optimizer='adam', metrics=["accuracy"])
 
 # Training model with train data. Fixed random seed:
 #np.random.seed(123)
-model.fit(X_scaled, y_scaled, epochs=2000, batch_size=2, callbacks=[tensorboard_callback], verbose=2)
+model.fit(X_scaled, y_scaled, epochs=2500, batch_size=2, callbacks=[tensorboard_callback], verbose=2)
 
 # Serialize model to JSON
 model_json = model.to_json()

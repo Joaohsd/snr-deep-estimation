@@ -26,10 +26,10 @@ if gpus:
 print (tf. test. is_gpu_available )
 
 # Preraring dataset
-X_l = np.loadtxt("dataset/adapted_64qam.csv")
+X_l = np.loadtxt("dataset/measured_64qam.csv")
 y_l = np.loadtxt("dataset/diff_64qam.csv")
-X = X_l[200:800]
-y = y_l[200:800]
+X = X_l[300:800]
+y = y_l[300:800]
 
 # Data Scaling from 0 to 1, X and y originally have very different scales.
 X_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
@@ -52,20 +52,13 @@ predicted = loaded_model.predict(X_scaled)
 x_graph = np.arange(-19.9, 40.1, 0.1)
 # Plot in blue color the predicted adata and in green color the
 # actual data to verify visually the accuracy of the model.
-pyplot.plot(x_graph, y_scaler.inverse_transform(y_scaled), '.', markersize=4, color="black")
-pyplot.plot(x_graph, y_scaler.inverse_transform(predicted), linewidth=2, color="red")
+pyplot.plot(X, y_scaler.inverse_transform(y_scaled), '.', markersize=4, color="black")
+pyplot.plot(X, y_scaler.inverse_transform(predicted), linewidth=2, color="red")
 pyplot.grid()
 pyplot.xlabel('Relação Sinal-ruído Adaptado', fontsize=16)
 pyplot.ylabel('Saída DNN', fontsize=16)
-pyplot.xticks(np.arange(-20,45,5), fontsize=12)
+pyplot.xticks(np.arange(-25,45,5), fontsize=12)
 pyplot.yticks(fontsize=12)
 pyplot.legend(( 'Dado', 'Estimado'), fontsize=14, loc='upper right')
 pyplot.savefig('snr_64qam_dnn144.png', dpi=400)
 pyplot.show()
-
-snr = 24
-x = np.arange(1)
-x[0] = (snr)
-y = X_scaler.transform(x.reshape(-1, 1))
-predicted = loaded_model(y)
-print(y_scaler.inverse_transform(predicted))

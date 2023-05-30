@@ -1,0 +1,27 @@
+
+{'name': 'dense', 'trainable': True, 'dtype': 'float32', 'units': 1, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'class_name': 'RandomUniform', 'config': {'minval': -0.05, 'maxval': 0.05, 'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None} 
+
+[array([[1.744565]], dtype=float32), array([-0.39607584], dtype=float32)] 
+
+
+{'name': 'dense_1', 'trainable': True, 'dtype': 'float32', 'units': 4, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None} 
+
+[array([[-2.7459078, -2.691793 , -2.188306 ,  1.4207704]], dtype=float32), array([-0.5015023 ,  0.8987453 ,  0.63677865,  0.0275382 ], dtype=float32)] 
+
+
+{'name': 'dense_2', 'trainable': True, 'dtype': 'float32', 'units': 4, 'activation': 'sigmoid', 'use_bias': True, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None} 
+
+[array([[ 1.5428836 , -0.5844092 , -1.066457  ,  0.15086588],
+       [ 0.7825846 , -2.0736282 , -1.4029425 , -4.669783  ],
+       [-0.0183926 , -1.157625  , -1.4011582 , -2.3091369 ],
+       [-0.3506581 ,  0.6435468 ,  1.949831  ,  0.95179504]],
+      dtype=float32), array([-0.89490986, -0.84202504,  0.63870823, -1.958233  ], dtype=float32)] 
+
+
+{'name': 'dense_3', 'trainable': True, 'dtype': 'float32', 'units': 1, 'activation': 'linear', 'use_bias': True, 'kernel_initializer': {'class_name': 'GlorotUniform', 'config': {'seed': None}}, 'bias_initializer': {'class_name': 'Zeros', 'config': {}}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None} 
+
+[array([[ 0.87478286],
+       [ 0.5331497 ],
+       [-0.363003  ],
+       [-0.36531928]], dtype=float32), array([0.2349322], dtype=float32)] 
+
