@@ -51,13 +51,15 @@ predicted = loaded_model.predict(X_scaled)
 x_graph = np.arange(-9.9, 40.1, 0.1)
 # Plot in blue color the predicted adata and in green color the
 # actual data to verify visually the accuracy of the model.
+# Plot in blue color the predicted adata and in green color the
+# actual data to verify visually the accuracy of the model.
 pyplot.plot(X, y_scaler.inverse_transform(y_scaled), '.', markersize=4, color="black")
 pyplot.plot(X, y_scaler.inverse_transform(predicted), linewidth=2, color="red")
 pyplot.grid()
-pyplot.xlabel('Relação Sinal-ruído Adaptado', fontsize=16)
-pyplot.ylabel('Saída DNN', fontsize=16)
+pyplot.xlabel('Função MSE Modificada', fontsize=14)
+pyplot.ylabel('Saída DNN', fontsize=14)
 pyplot.xticks(np.arange(-20,45,5), fontsize=12)
 pyplot.yticks(fontsize=12)
-pyplot.legend(( 'Dado', 'Estimado'), fontsize=14, loc='upper right')
-pyplot.savefig('snr_16qam_dnn144.png', dpi=400)
+pyplot.legend(('Dado', 'Estimado'), fontsize=14, loc='upper right')
+pyplot.savefig('snr_16qam_dnn146.png', dpi=400)
 pyplot.show()
