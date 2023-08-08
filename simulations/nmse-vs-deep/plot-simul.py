@@ -28,8 +28,8 @@ ax.plot(snr_l[::5], dnn_l[::5], marker='.',markersize=8,linestyle = 'None',color
 
 
 ax.grid(visible=True)
-ax.set_xlabel('SNR real do canal', fontsize=14)
-ax.set_ylabel('Estimativa de SNR', fontsize=14)
+ax.set_xlabel('SNR real do canal [dB]', fontsize=14)
+ax.set_ylabel('Estimativa de SNR [dB]', fontsize=14)
 ax.set_xticks(np.arange(-10,45,5))
 ax.set_yticks(np.arange(-25,45,5))
 plt.xticks(fontsize=12)
