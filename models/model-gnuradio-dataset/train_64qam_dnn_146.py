@@ -21,12 +21,13 @@ if gpus:
     except RuntimeError as e:
         # Memory growth must be set before GPUs have been initialized
         print(e)
+
 print (tf. test. is_gpu_available )
 
 # Preraring dataset
-X_l = np.loadtxt("dataset/measured_16qam.csv")
-y_l = np.loadtxt("dataset/diff_16qam.csv")
-logdir = "logs/scalars/" + "16QAM"
+X_l = np.loadtxt("dataset/measured_64qam.csv")
+y_l = np.loadtxt("dataset/diff_64qam.csv")
+logdir = "logs/scalars/" + "64QAM"
 tensorboard_callback = keras.callbacks.TensorBoard(log_dir=logdir)
 
 X = X_l[300:800]
@@ -56,14 +57,15 @@ model.compile(loss='mse', optimizer='adam', metrics=["accuracy"])
 
 # Training model with train data. Fixed random seed:
 #np.random.seed(123)
-model.fit(X_scaled, y_scaled, epochs=2500, batch_size=2, callbacks=[tensorboard_callback], verbose=2)
+with tf.device('/GPU:0'):
+    model.fit(X_scaled, y_scaled, epochs=2500, batch_size=2, callbacks=[tensorboard_callback], verbose=2)
 
 # Serialize model to JSON
 model_json = model.to_json()
-with open("model_16qam_144d.json", "w") as json_file:
+with open("model_64qam_146d.json", "w") as json_file:
     json_file.write(model_json)
 # serialize weights to HDF5
-model.save_weights("model_16qam_144d.h5")
+model.save_weights("model_64qam_146d.h5")
 print("Saved model to disk")
 
 # Predict the response variable with new data
@@ -73,5 +75,5 @@ predicted = model.predict(X_scaled)
 # actual data to verify visually the accuracy of the model.
 pyplot.plot(y_scaler.inverse_transform(predicted), color="red")
 pyplot.plot(y_scaler.inverse_transform(y_scaled), color="green")
-pyplot.legend(('Predicted', 'Data'), loc='upper right')
+pyplot.legend(('Predicted 64QAM', 'Data'), loc='lower right')
 pyplot.show()

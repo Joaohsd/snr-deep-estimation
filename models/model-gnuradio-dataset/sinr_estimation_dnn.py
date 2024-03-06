@@ -93,36 +93,36 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         self.y_scaler_256.fit(y.reshape(-1,1))
 
         # load json and created models
-        self.json_file = open('model_qpsk_144d.json', 'r')
+        self.json_file = open('model_qpsk_146d.json', 'r')
         self.model_qpsk_json = self.json_file.read()
         self.json_file.close()
         self.model_qpsk = model_from_json(self.model_qpsk_json)
         # load weights into new model
-        self.model_qpsk.load_weights("model_qpsk_144d.h5")
+        self.model_qpsk.load_weights("model_qpsk_146d.h5")
 
         # load json and created models
-        self.json_file = open('model_16qam_144d.json', 'r')
+        self.json_file = open('model_16qam_146d.json', 'r')
         self.model_16_json = self.json_file.read()
         self.json_file.close()
         self.model_16 = model_from_json(self.model_16_json)
         # load weights into new model
-        self.model_16.load_weights("model_16qam_144d.h5")
+        self.model_16.load_weights("model_16qam_146d.h5")
 
         # load json and created models
-        self.json_file = open('model_64qam_144d.json', 'r')
+        self.json_file = open('model_64qam_146d.json', 'r')
         self.model_64_json = self.json_file.read()
         self.json_file.close()
         self.model_64 = model_from_json(self.model_64_json)
         # load weights into new model
-        self.model_64.load_weights("model_64qam_144d.h5")
+        self.model_64.load_weights("model_64qam_146d.h5")
 
         # load json and created models
-        self.json_file = open('model_256qam_144d.json', 'r')
+        self.json_file = open('model_256qam_146d.json', 'r')
         self.model_256_json = self.json_file.read()
         self.json_file.close()
         self.model_256 = model_from_json(self.model_256_json)
         # load weights into new model
-        self.model_256.load_weights("model_256qam_144d.h5")
+        self.model_256.load_weights("model_256qam_146d.h5")
 
         # Default configuration
         self.X_scaler = self.X_scaler_qpsk

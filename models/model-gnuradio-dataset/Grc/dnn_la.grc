@@ -1,0 +1,1523 @@
+options:
+  parameters:
+    author: gt
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: top_block_2
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: '1'
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Loopback Transmitter
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: frame_numSymbols
+  id: variable
+  parameters:
+    comment: ''
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 76.0]
+    rotation: 0
+    state: true
+- name: frame_preambleLength
+  id: variable
+  parameters:
+    comment: ''
+    value: '256'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 12.0]
+    rotation: 0
+    state: enabled
+- name: gfdm_K
+  id: variable
+  parameters:
+    comment: ''
+    value: '2048'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 12.0]
+    rotation: 0
+    state: true
+- name: gfdm_M
+  id: variable
+  parameters:
+    comment: ''
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 76.0]
+    rotation: 0
+    state: true
+- name: gfdm_N
+  id: variable
+  parameters:
+    comment: ''
+    value: 2048*4
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 140.0]
+    rotation: 0
+    state: true
+- name: gfdm_NCP
+  id: variable
+  parameters:
+    comment: ''
+    value: '128'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 140.0]
+    rotation: 0
+    state: true
+- name: gfdm_NCS
+  id: variable
+  parameters:
+    comment: ''
+    value: '64'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 12.0]
+    rotation: 0
+    state: true
+- name: gfdm_NW
+  id: variable
+  parameters:
+    comment: ''
+    value: '32'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 76.0]
+    rotation: 0
+    state: true
+- name: gfdm_a
+  id: variable
+  parameters:
+    comment: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, 204.0]
+    rotation: 0
+    state: true
+- name: gfdm_symbolLen
+  id: variable
+  parameters:
+    comment: ''
+    value: (2048*4)+128+64
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [584, 204.0]
+    rotation: 0
+    state: true
+- name: headroom
+  id: variable
+  parameters:
+    comment: ''
+    value: '1.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 140.0]
+    rotation: 0
+    state: true
+- name: high_low
+  id: variable
+  parameters:
+    comment: 'Set to zero to TX RX Loopback
+
+      {+1, 0, -1}'
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 396.0]
+    rotation: 0
+    state: true
+- name: mcs_mode
+  id: variable
+  parameters:
+    comment: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [976, 12.0]
+    rotation: 0
+    state: true
+- name: mpattern
+  id: variable
+  parameters:
+    comment: ''
+    value: scmux.maxPattern
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 380.0]
+    rotation: 0
+    state: true
+- name: mux_activeSubCarries
+  id: variable
+  parameters:
+    comment: ''
+    value: np.concatenate((  np.repeat(1, np.ceil(nactive/2)), np.repeat(0, gfdm_K-nactive
+      )  , np.repeat(1, np.floor(nactive/2))  )).astype(int)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 140.0]
+    rotation: 0
+    state: true
+- name: mux_framePattern
+  id: variable
+  parameters:
+    comment: ''
+    value: np.concatenate((0*np.ones(frame_preambleLength) ,1*np.ones(gfdm_symbolLen*frame_numSymbols)
+      ),0).astype(int)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 204.0]
+    rotation: 0
+    state: true
+- name: mux_pilotSpacing
+  id: variable
+  parameters:
+    comment: ''
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 268.0]
+    rotation: 0
+    state: true
+- name: mux_pilotTimeSpacing
+  id: variable
+  parameters:
+    comment: ''
+    value: '4'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 332.0]
+    rotation: 0
+    state: true
+- name: nactive
+  id: variable
+  parameters:
+    comment: Must be multiple of pilot spacing
+    value: 1536+12
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 12.0]
+    rotation: 0
+    state: true
+- name: pilots
+  id: variable
+  parameters:
+    comment: ''
+    value: inatel5g.get_zadoffChu(scmux.pilotLen,7)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 380.0]
+    rotation: 0
+    state: enabled
+- name: preamble
+  id: variable
+  parameters:
+    comment: ''
+    value: inatel5g.get_preamble(frame_preambleLength,gfdm_K,nactive )
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 252.0]
+    rotation: 0
+    state: true
+- name: ref_sep
+  id: variable
+  parameters:
+    comment: ''
+    value: 30e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 204.0]
+    rotation: 0
+    state: true
+- name: rf_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: 2100e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 204.0]
+    rotation: 0
+    state: true
+- name: root
+  id: variable
+  parameters:
+    comment: ''
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [296, 12.0]
+    rotation: 0
+    state: true
+- name: rx_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: 2100e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 268.0]
+    rotation: 0
+    state: true
+- name: rx_offset
+  id: variable
+  parameters:
+    comment: ''
+    value: '61440000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 268.0]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '30720000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [192, 12.0]
+    rotation: 0
+    state: enabled
+- name: scmux
+  id: variable
+  parameters:
+    comment: ''
+    value: inatel5g.get_SubcarrierPattern(gfdm_K,gfdm_M,nactive,mux_pilotSpacing,
+      mux_pilotTimeSpacing,frame_numSymbols)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 188.0]
+    rotation: 0
+    state: true
+- name: snr
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '-10'
+    step: '0.1'
+    stop: '40'
+    value: '24.2'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1248, 916.0]
+    rotation: 0
+    state: true
+- name: syncref
+  id: variable
+  parameters:
+    comment: ''
+    value: np.conj(np.flipud(preamble))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 316.0]
+    rotation: 0
+    state: enabled
+- name: tx_freq
+  id: variable
+  parameters:
+    comment: ''
+    value: 2100e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [336, 332.0]
+    rotation: 0
+    state: true
+- name: tx_mcs
+  id: variable
+  parameters:
+    comment: ''
+    value: '13'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [976, 92.0]
+    rotation: 0
+    state: true
+- name: tx_offset
+  id: variable
+  parameters:
+    comment: ''
+    value: '61440000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [416, 332.0]
+    rotation: 0
+    state: true
+- name: analog_const_source_x_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [784, 772.0]
+    rotation: 0
+    state: true
+- name: analog_fastnoise_source_x_0
+  id: analog_fastnoise_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: 0.78*np.sqrt(gfdm_K/float(nactive))
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    noise_type: analog.GR_GAUSSIAN
+    samples: int(30e6)+1
+    seed: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1376, 916.0]
+    rotation: 0
+    state: true
+- name: blocks_add_xx_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1824, 808.0]
+    rotation: 0
+    state: true
+- name: blocks_message_debug_0_0
+  id: blocks_message_debug
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    en_uvec: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1712, 560.0]
+    rotation: 0
+    state: disabled
+- name: blocks_message_strobe_0
+  id: blocks_message_strobe
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    msg: pmt.intern("TEST")
+    period: '60000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [552, 1356.0]
+    rotation: 0
+    state: true
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: pow(10,((-1.0*snr)/20.0))
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1616, 964.0]
+    rotation: 0
+    state: enabled
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1424, 1368.0]
+    rotation: 0
+    state: true
+- name: blocks_null_source_1
+  id: blocks_null_source
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_source: '[[0,],]'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 808.0]
+    rotation: 0
+    state: true
+- name: blocks_patterned_interleaver_0
+  id: blocks_patterned_interleaver
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    pattern: scmux.sc_pattern.tolist()
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [992, 776.0]
+    rotation: 0
+    state: true
+- name: blocks_probe_rate_1
+  id: blocks_probe_rate
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha: '0.15'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mintime: '1000.0'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1440, 548.0]
+    rotation: 0
+    state: disabled
+- name: blocks_socket_pdu_0
+  id: blocks_socket_pdu
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    host: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mtu: scmux.dataLen
+    port: '52001'
+    tcp_no_delay: 'True'
+    type: TCP_SERVER
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 700.0]
+    rotation: 0
+    state: true
+- name: blocks_vector_source_x_0
+  id: blocks_vector_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'True'
+    tags: '[]'
+    type: complex
+    vector: pilots/headroom
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [744, 852.0]
+    rotation: 0
+    state: true
+- name: deepSnrEstimation_discard_control_0
+  id: deepSnrEstimation_discard_control
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_qam: scmux.dataLen
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [832, 1076.0]
+    rotation: 0
+    state: true
+- name: epy_block_0_2
+  id: epy_block
+  parameters:
+    _source_code: "import pmt\nimport numpy as np\nimport tensorflow as tf\nfrom gnuradio\
+      \ import gr\nfrom tensorflow.python.ops.numpy_ops import np_config\nfrom sklearn\
+      \ import preprocessing\nfrom keras.models import model_from_json\nfrom numba\
+      \ import jit\n\nMOD_QPSK = 0\nMOD_16_QAM = 1\nMOD_64_QAM = 2\nMOD_256_QAM =\
+      \ 3\n\nclass blk(gr.sync_block):  # other base classes are basic_block, decim_block,\
+      \ interp_block\n    def __init__(self, dnn_dis=0.0):  # DNN disable parameter\n\
+      \        gr.sync_block.__init__(\n            self,\n            name='SINR\
+      \ Estimation-DNN',   # will show up in GRC\n            in_sig=[np.complex64],\n\
+      \            out_sig=[np.float32, np.float32]\n        )\n\n        gpus = tf.config.list_physical_devices('GPU')\n\
+      \        if gpus:\n                try:\n    \t\t\t# Currently, memory growth\
+      \ needs to be the same across GPUs\n                        for gpu in gpus:\n\
+      \                                tf.config.experimental.set_memory_growth(gpu,\
+      \ True)\n                        logical_gpus = tf.config.list_logical_devices('GPU')\n\
+      \                        print(len(gpus), \"Physical GPUs,\", len(logical_gpus),\
+      \ \"Logical GPUs\")\n                except RuntimeError as e:\n           \
+      \             # Memory growth must be set before GPUs have been initialized\n\
+      \                        print(e)\n        self.mcs = 0\n        self.mcs_d\
+      \ = 0\n        self.mcs_control = 0\n        self.mcs_control_d = 0\n      \
+      \  self.modul = 0\n        self.modul_d = 0\n        self.message_port_register_in(pmt.intern('msg_in'))\n\
+      \        self.set_msg_handler(pmt.intern('msg_in'), self.handle_msg)\n     \
+      \   self.message_port_register_out(pmt.intern('mcs'))\n        # if an attribute\
+      \ with the same name as a parameter is found,\n        # a callback is registered\
+      \ (properties work, too).\n        self.dnn_dis = dnn_dis\n        self.key\
+      \ = pmt.intern(\"set_tx_mcs\")\n        self.mcs_table = (5.5 + 1.5, 6.5 + 1.5,\
+      \ 7.0 + 1.5, 8.0 + 1.5, 12.0 + 1.5, 13.0 + 1.5, 14.0 + 1.5,\\\n\t\t14.5 + 1.5,\
+      \ 18.5 + 1.5, 19.5 + 1.5, 20.0 + 1.5, 25.5 + 1.5, 26.5 + 1.5, 27.5 + 1.5)\n\
+      \        self.mcs_max = 13\n        self.mse = 20\n        self.snr_adapt =\
+      \ 20\n\n        # Preraring dataset\n        X_l = np.loadtxt(\"measured_qpsk.csv\"\
+      )\n        y_l = np.loadtxt(\"diff_qpsk.csv\")\n        X = X_l[300:800]\n \
+      \       y = y_l[300:800]\n\n        self.X_scaler_qpsk = preprocessing.MinMaxScaler(feature_range=(0,\
+      \ 1))\n        self.y_scaler_qpsk = preprocessing.MinMaxScaler(feature_range=(0,\
+      \ 1))\n        self.X_scaler_qpsk.fit(X.reshape(-1,1))\n        self.y_scaler_qpsk.fit(y.reshape(-1,1))\n\
+      \n        X_l = np.loadtxt(\"measured_16qam.csv\")\n        y_l = np.loadtxt(\"\
+      diff_16qam.csv\")\n        X = X_l[300:800]\n        y = y_l[300:800]\n\n  \
+      \      self.X_scaler_16 = preprocessing.MinMaxScaler(feature_range=(0, 1))\n\
+      \        self.y_scaler_16 = preprocessing.MinMaxScaler(feature_range=(0, 1))\n\
+      \        self.X_scaler_16.fit(X.reshape(-1,1))\n        self.y_scaler_16.fit(y.reshape(-1,1))\n\
+      \n        X_l = np.loadtxt(\"measured_64qam.csv\")\n        y_l = np.loadtxt(\"\
+      diff_64qam.csv\")\n        X = X_l[300:800]\n        y = y_l[300:800]\n\n  \
+      \      self.X_scaler_64 = preprocessing.MinMaxScaler(feature_range=(0, 1))\n\
+      \        self.y_scaler_64 = preprocessing.MinMaxScaler(feature_range=(0, 1))\n\
+      \        self.X_scaler_64.fit(X.reshape(-1,1))\n        self.y_scaler_64.fit(y.reshape(-1,1))\n\
+      \n        X_l = np.loadtxt(\"measured_256qam.csv\")\n        y_l = np.loadtxt(\"\
+      diff_256qam.csv\")\n        X = X_l[300:800]\n        y = y_l[300:800]\n\n \
+      \       self.X_scaler_256 = preprocessing.MinMaxScaler(feature_range=(0, 1))\n\
+      \        self.y_scaler_256 = preprocessing.MinMaxScaler(feature_range=(0, 1))\n\
+      \        self.X_scaler_256.fit(X.reshape(-1,1))\n        self.y_scaler_256.fit(y.reshape(-1,1))\n\
+      \n        # load json and created models\n        self.json_file = open('model_qpsk_146d.json',\
+      \ 'r')\n        self.model_qpsk_json = self.json_file.read()\n        self.json_file.close()\n\
+      \        self.model_qpsk = model_from_json(self.model_qpsk_json)\n        #\
+      \ load weights into new model\n        self.model_qpsk.load_weights(\"model_qpsk_146d.h5\"\
+      )\n\n        # load json and created models\n        self.json_file = open('model_16qam_146d.json',\
+      \ 'r')\n        self.model_16_json = self.json_file.read()\n        self.json_file.close()\n\
+      \        self.model_16 = model_from_json(self.model_16_json)\n        # load\
+      \ weights into new model\n        self.model_16.load_weights(\"model_16qam_146d.h5\"\
+      )\n\n        # load json and created models\n        self.json_file = open('model_64qam_146d.json',\
+      \ 'r')\n        self.model_64_json = self.json_file.read()\n        self.json_file.close()\n\
+      \        self.model_64 = model_from_json(self.model_64_json)\n        # load\
+      \ weights into new model\n        self.model_64.load_weights(\"model_64qam_146d.h5\"\
+      )\n\n        # load json and created models\n        self.json_file = open('model_256qam_146d.json',\
+      \ 'r')\n        self.model_256_json = self.json_file.read()\n        self.json_file.close()\n\
+      \        self.model_256 = model_from_json(self.model_256_json)\n        # load\
+      \ weights into new model\n        self.model_256.load_weights(\"model_256qam_146d.h5\"\
+      )\n\n        # Default configuration\n        self.X_scaler = self.X_scaler_qpsk\n\
+      \        self.y_scaler = self.y_scaler_qpsk\n        self.max_value = np.float32(2.0)\n\
+      \        self.factor = np.float32(1.414213562)\n        self.beta = np.float32(1.0)\n\
+      \n    def handle_msg(self, msg_pmt):\n        set_rx_mcs = pmt.intern(\"MCS\"\
+      )\n        if (pmt.car(msg_pmt) == set_rx_mcs):\n                msg = pmt.cdr(msg_pmt)\n\
+      \                #print (msg)\n                self.mcs_d = self.mcs\n     \
+      \           self.mcs = pmt.to_python(msg)\n        if self.mcs == self.mcs_d:\n\
+      \                return\n        #self.mcs = 10\n        if self.mcs < 4:\n\
+      \                self.modul_d = self.modul\n                self.modul = MOD_QPSK\n\
+      \        elif self.mcs < 8:\n                self.modul_d = self.modul\n   \
+      \             self.modul = MOD_16_QAM\n        elif self.mcs < 11:\n       \
+      \         self.modul_d = self.modul\n                self.modul = MOD_64_QAM\n\
+      \        elif self.mcs < 14:\n                self.modul_d = self.modul\n  \
+      \              self.modul = MOD_256_QAM\n        if self.modul == self.modul_d:\n\
+      \                return\n        if self.modul == MOD_QPSK:\n              \
+      \  self.X_scaler = self.X_scaler_qpsk\n                self.y_scaler = self.y_scaler_qpsk\n\
+      \                self.max_value = np.float32(2.0)\n                self.factor\
+      \ = np.float32(1.414213562)\n                self.beta = np.float32(1.0)\n \
+      \               #print (\"***** config DNN: QPSK *****\")\n        elif self.modul\
+      \ == MOD_16_QAM:\n                self.X_scaler = self.X_scaler_16\n       \
+      \         self.y_scaler = self.y_scaler_16\n                self.max_value =\
+      \ np.float32(4.0)\n                self.factor = np.float32(3.16227766)\n  \
+      \              self.beta = np.float32(2.0)\n                #print (\"*****\
+      \ config DNN: 16QAM *****\")\n        elif self.modul == MOD_64_QAM:\n     \
+      \           self.X_scaler = self.X_scaler_64\n                self.y_scaler\
+      \ = self.y_scaler_64\n                self.max_value = np.float32(8.0)\n   \
+      \             self.factor = np.float32(6.4807407)\n                self.beta\
+      \ = np.float32(3.0)\n                #print (\"***** config DNN: 64QAM *****\"\
+      )\n        elif self.modul == MOD_256_QAM:\n                self.X_scaler =\
+      \ self.X_scaler_256\n                self.y_scaler = self.y_scaler_256\n   \
+      \             self.max_value = np.float32(16.0)\n                self.factor\
+      \ = np.float32(13.038413)\n                self.beta = np.float32(4.0)\n   \
+      \             #print (\"***** config DNN: 256QAM *****\")\n    @jit \n    def\
+      \ mse_calc(self, N, complex_input):\n        max_value = self.max_value\n  \
+      \      factor = self.factor\n        beta = self.beta\n        mse = np.float32(0.0)\n\
+      \        for i in range(N):\n            d_real = np.abs(np.real(complex_input[i]))*factor\n\
+      \            d_imag = np.abs(np.imag(complex_input[i]))*factor\n\n         \
+      \   dec_real = np.round((d_real + 1.0)/2.0)*2.0 - 1.0\n            comp_real\
+      \ = np.float32(0.0)\n            if (d_real > max_value):\n                \
+      \    dec_real = max_value - 1.0\n                    comp_real = np.abs(d_real\
+      \ - dec_real)\n            dec_imag = np.round((d_imag + 1.0)/2.0)*2.0 - 1.0\n\
+      \            comp_imag = np.float32(0.0)\n            if (d_imag > max_value):\n\
+      \                    dec_imag = max_value - 1.0\n                    comp_imag\
+      \ = np.abs(d_imag - dec_imag)\n            comp_real = beta*comp_real/factor\n\
+      \            comp_imag = beta*comp_imag/factor\n            d_real = (d_real\
+      \ - dec_real)/factor\n            d_imag = (d_imag - dec_imag)/factor\n    \
+      \        mse = mse + d_real * d_real + d_imag * d_imag + comp_real * comp_real\
+      \ + comp_imag * comp_imag\n        return -10*np.log10(mse/N)\n    \n    @tf.function(jit_compile=True)\n\
+      \    def predict_qpsk(self, x):\n        return self.model_qpsk(x)\n    \n \
+      \   @tf.function(jit_compile=True)\n    def predict_16qam(self, x):\n      \
+      \  return self.model_16(x)\n    \n    @tf.function(jit_compile=True)\n    def\
+      \ predict_64qam(self, x):\n        return self.model_64(x)\n    \n    @tf.function(jit_compile=True)\n\
+      \    def predict_256qam(self, x):\n        return self.model_256(x)\n\n#   \
+      \ @jit\n    def calc_error(self, snr):\n        x = np.zeros(shape=(1, 1), dtype=np.float32)\n\
+      \        x[0] = (snr)\n        #print(f'X: {x}')\n        y = self.X_scaler.transform(x.reshape(-1,\
+      \ 1))\n        #print(f'X_SCALED: {y}')\n        if self.modul == MOD_QPSK:\n\
+      \            pred = self.predict_qpsk(y)\n        elif self.modul == MOD_16_QAM:\n\
+      \            pred = self.predict_16qam(y)\n        elif self.modul == MOD_64_QAM:\n\
+      \            pred = self.predict_64qam(y)\n        elif self.modul == MOD_256_QAM:\n\
+      \            pred = self.predict_256qam(y)\n        #print(f'PRED: {pred}')\n\
+      \        scaled = self.y_scaler.inverse_transform(pred)\n        #print(f'SCALED:\
+      \ {scaled}')\n        return scaled\n\n    def work(self, input_items, output_items):\n\
+      \        n = np.size(input_items[0])\n        self.snr_adapt += self.mse_calc(n,\
+      \ input_items[0][:]) - self.snr_adapt/64\n        snr_adapt_f = self.snr_adapt/64\n\
+      \        dnn_comp = self.calc_error(snr_adapt_f) + snr_adapt_f\n        self.mse\
+      \ += dnn_comp - self.mse/64\n        mse_f = self.mse/64\n        if self.mcs_control\
+      \ > 0:\t\t\t\t# fallback test\n                if mse_f < self.mcs_table[self.mcs_control]:\n\
+      \                        self.mcs_control -= 1\n        if self.mcs_control\
+      \ < (self.mcs_max):\t\t\t# fall forward test\n                if mse_f > (self.mcs_table[self.mcs_control+1]\
+      \ + 1.0):\n                        self.mcs_control += 1\n        if self.mcs_control_d\
+      \ != self.mcs_control:\n                self.mcs_control_d = self.mcs_control\n\
+      \                val = pmt.from_long(self.mcs_control)\n                mcs_dict\
+      \ = pmt.make_dict()\n                mcs_dict = pmt.dict_add(mcs_dict, self.key,\
+      \ val)\n                self.message_port_pub(pmt.intern('mcs'), mcs_dict)\n\
+      \        output_items[0][:] = mse_f\n        output_items[1][:] = snr_adapt_f\n\
+      \        return len(output_items[0])\n\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    dnn_dis: '0.0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('SINR Estimation-DNN', 'blk', [('dnn_dis', '0.0')], [('0', 'complex',
+      1), ('msg_in', 'message', 1)], [('0', 'float', 1), ('1', 'float', 1), ('mcs',
+      'message', 1)], '', ['dnn_dis'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1056, 1064.0]
+    rotation: 0
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import inatel5g
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 140.0]
+    rotation: 0
+    state: true
+- name: import_1
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy as np
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 140.0]
+    rotation: 0
+    state: true
+- name: inatel5g_c_equalizer_0
+  id: inatel5g_c_equalizer
+  parameters:
+    K: gfdm_K
+    M: gfdm_M
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp_type: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    pattern: scmux.sc_pattern
+    pilot_df: mux_pilotSpacing
+    pilot_dt: mux_pilotTimeSpacing
+    pilots: pilots
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [496, 1196.0]
+    rotation: 0
+    state: true
+- name: inatel5g_gfdm_waveform_0
+  id: inatel5g_gfdm_waveform
+  parameters:
+    K: gfdm_K
+    M: gfdm_M
+    NCP: gfdm_NCP
+    NCS: gfdm_NCS
+    NW: gfdm_NW
+    affinity: ''
+    alias: ''
+    alpha: gfdm_a
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mod_demod: 'True'
+    num_inputs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1224, 748.0]
+    rotation: 0
+    state: enabled
+- name: inatel5g_gfdm_waveform_1
+  id: inatel5g_gfdm_waveform
+  parameters:
+    K: gfdm_K
+    M: gfdm_M
+    NCP: gfdm_NCP
+    NCS: gfdm_NCS
+    NW: gfdm_NW
+    affinity: ''
+    alias: ''
+    alpha: gfdm_a
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    mod_demod: 'False'
+    num_inputs: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 1188.0]
+    rotation: 0
+    state: enabled
+- name: inatel5g_search_header_0
+  id: inatel5g_search_header
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    header: '0xC01DBEEF'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1216, 1368.0]
+    rotation: 0
+    state: true
+- name: inatel5g_variable_deframer_cb_0
+  id: inatel5g_variable_deframer_cb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    mcs: '0'
+    minoutbuf: '0'
+    num_qam: scmux.dataLen
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [920, 1384.0]
+    rotation: 0
+    state: true
+- name: inatel5g_variable_framer_bc_0
+  id: inatel5g_variable_framer_bc
+  parameters:
+    affinity: ''
+    alias: ''
+    blocklen: scmux.dataLen
+    buffersize: (2**25)
+    comment: ''
+    maxoutbuf: '0'
+    mcs: tx_mcs
+    minoutbuf: '0'
+    mode: mcs_mode
+    sync_len: len(mux_framePattern)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [504, 772.0]
+    rotation: 0
+    state: true
+- name: qtgui_const_sink_x_0
+  id: qtgui_const_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '0.2'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: '"red"'
+    color10: '"red"'
+    color2: '"red"'
+    color3: '"red"'
+    color4: '"red"'
+    color5: '"red"'
+    color6: '"red"'
+    color7: '"red"'
+    color8: '"red"'
+    color9: '"red"'
+    comment: ''
+    grid: 'True'
+    gui_hint: 2,0,8,1
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '0'
+    marker10: '0'
+    marker2: '0'
+    marker3: '0'
+    marker4: '0'
+    marker5: '0'
+    marker6: '0'
+    marker7: '0'
+    marker8: '0'
+    marker9: '0'
+    name: '"Constelation"'
+    nconnections: '1'
+    size: sum(scmux.sc_pattern==1)
+    style1: '0'
+    style10: '0'
+    style2: '0'
+    style3: '0'
+    style4: '0'
+    style5: '0'
+    style6: '0'
+    style7: '0'
+    style8: '0'
+    style9: '0'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '"eq_frame_start"'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    xmax: '+2'
+    xmin: '-2'
+    ymax: '+2'
+    ymin: '-2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1056, 948.0]
+    rotation: 0
+    state: true
+- name: qtgui_number_sink_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '40'
+    min: '-20'
+    name: '"DNN SNR"'
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.01'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1400, 1028.0]
+    rotation: 0
+    state: true
+- name: qtgui_number_sink_0_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_HORIZ
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '40'
+    min: '-20'
+    name: '"MMSE SNR"'
+    nconnections: '1'
+    type: float
+    unit1: ''
+    unit10: ''
+    unit2: ''
+    unit3: ''
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.01'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1400, 1148.0]
+    rotation: 0
+    state: true
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label1: ''
+    label10: Signal 10
+    label2: ''
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '""'
+    nconnections: '1'
+    size: scmux.dataLen
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '1'
+    ymin: '-1'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [768, 580.0]
+    rotation: 0
+    state: true
+- name: qtgui_time_sink_x_0_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'True'
+    gui_hint: 2,1,8,1
+    label1: '|H|'
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: '"Channel Frequency Response"'
+    nconnections: '1'
+    size: '1024'
+    srate: '1'
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: msg_float
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '6'
+    ymin: '-85'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [856, 1244.0]
+    rotation: 0
+    state: disabled
+- name: virtual_sink_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: tx0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [792, 692.0]
+    rotation: 0
+    state: true
+- name: virtual_sink_1
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: rx_signal
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1944, 820.0]
+    rotation: 0
+    state: true
+- name: virtual_sink_1_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: recv_data
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1424, 1412.0]
+    rotation: 0
+    state: true
+- name: virtual_sink_1_0_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: mcs_control
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1408, 1276.0]
+    rotation: 0
+    state: disabled
+- name: virtual_source_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: recv_data
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 732.0]
+    rotation: 0
+    state: true
+- name: virtual_source_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: mcs_control
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [248, 892.0]
+    rotation: 0
+    state: disabled
+- name: virtual_source_1
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: rx_signal
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 1244.0]
+    rotation: 0
+    state: true
+
+connections:
+- [analog_const_source_x_0, '0', blocks_patterned_interleaver_0, '0']
+- [analog_fastnoise_source_x_0, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_add_xx_0, '0', virtual_sink_1, '0']
+- [blocks_message_strobe_0, strobe, inatel5g_variable_deframer_cb_0, reset_ber]
+- [blocks_multiply_const_vxx_0, '0', blocks_add_xx_0, '1']
+- [blocks_null_source_1, '0', inatel5g_variable_framer_bc_0, '0']
+- [blocks_patterned_interleaver_0, '0', inatel5g_gfdm_waveform_0, '0']
+- [blocks_probe_rate_1, rate, blocks_message_debug_0_0, print]
+- [blocks_socket_pdu_0, pdus, inatel5g_variable_framer_bc_0, pdus]
+- [blocks_vector_source_x_0, '0', blocks_patterned_interleaver_0, '2']
+- [deepSnrEstimation_discard_control_0, '0', epy_block_0_2, '0']
+- [deepSnrEstimation_discard_control_0, '0', qtgui_const_sink_x_0, '0']
+- [epy_block_0_2, '0', qtgui_number_sink_0, '0']
+- [epy_block_0_2, '1', qtgui_number_sink_0_0, '0']
+- [epy_block_0_2, mcs, virtual_sink_1_0_0, '0']
+- [inatel5g_c_equalizer_0, '0', deepSnrEstimation_discard_control_0, '0']
+- [inatel5g_c_equalizer_0, '0', inatel5g_variable_deframer_cb_0, '0']
+- [inatel5g_c_equalizer_0, channel_est, qtgui_time_sink_x_0_0, in]
+- [inatel5g_gfdm_waveform_0, '0', blocks_add_xx_0, '0']
+- [inatel5g_gfdm_waveform_0, '0', blocks_probe_rate_1, '0']
+- [inatel5g_gfdm_waveform_1, '0', inatel5g_c_equalizer_0, '0']
+- [inatel5g_search_header_0, '0', blocks_null_sink_0, '0']
+- [inatel5g_search_header_0, pdus, virtual_sink_1_0, '0']
+- [inatel5g_variable_deframer_cb_0, '0', inatel5g_search_header_0, '0']
+- [inatel5g_variable_deframer_cb_0, rx_status, epy_block_0_2, msg_in]
+- [inatel5g_variable_framer_bc_0, '0', blocks_patterned_interleaver_0, '1']
+- [inatel5g_variable_framer_bc_0, '0', qtgui_time_sink_x_0, '0']
+- [inatel5g_variable_framer_bc_0, '0', virtual_sink_0, '0']
+- [virtual_source_0, '0', blocks_socket_pdu_0, pdus]
+- [virtual_source_0_0, '0', inatel5g_variable_framer_bc_0, cmd]
+- [virtual_source_1, '0', inatel5g_gfdm_waveform_1, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.9.7.0

@@ -38,12 +38,12 @@ X_scaled = (X_scaler.fit_transform(X.reshape(-1,1)))
 y_scaled = (y_scaler.fit_transform(y.reshape(-1,1)))
 
 # load json and created model
-json_file = open('model_qpsk_144d.json', 'r')
+json_file = open('model_qpsk_146d.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
 # load weights into new model
-loaded_model.load_weights("model_qpsk_144d.h5")
+loaded_model.load_weights("model_qpsk_146d.h5")
 print("Loaded model from disk")
 
 # Predict the response variable with new data

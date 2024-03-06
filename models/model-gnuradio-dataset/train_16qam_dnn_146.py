@@ -8,11 +8,25 @@ from keras.models import Sequential
 import keras
 from datetime import datetime
 from packaging import version
+import tensorflow as tf
+
+gpus = tf.config.list_physical_devices('GPU')
+if gpus:
+    try:
+        # Currently, memory growth needs to be the same across GPUs
+        for gpu in gpus:
+                tf.config.experimental.set_memory_growth(gpu, True)
+        logical_gpus = tf.config.list_logical_devices('GPU')
+        print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
+    except RuntimeError as e:
+        # Memory growth must be set before GPUs have been initialized
+        print(e)
+print (tf. test. is_gpu_available )
 
 # Preraring dataset
-X_l = np.loadtxt("dataset/measured_256qam.csv")
-y_l = np.loadtxt("dataset/diff_256qam.csv")
-logdir = "logs/scalars/" + "256QAM"
+X_l = np.loadtxt("dataset/measured_16qam.csv")
+y_l = np.loadtxt("dataset/diff_16qam.csv")
+logdir = "logs/scalars/" + "16QAM"
 tensorboard_callback = keras.callbacks.TensorBoard(log_dir=logdir)
 
 X = X_l[300:800]
@@ -46,10 +60,10 @@ model.fit(X_scaled, y_scaled, epochs=2500, batch_size=2, callbacks=[tensorboard_
 
 # Serialize model to JSON
 model_json = model.to_json()
-with open("model_256qam_144d.json", "w") as json_file:
+with open("model_16qam_146d.json", "w") as json_file:
     json_file.write(model_json)
 # serialize weights to HDF5
-model.save_weights("model_256qam_144d.h5")
+model.save_weights("model_16qam_146d.h5")
 print("Saved model to disk")
 
 # Predict the response variable with new data
@@ -57,7 +71,7 @@ predicted = model.predict(X_scaled)
 
 # Plot in blue color the predicted adata and in green color the
 # actual data to verify visually the accuracy of the model.
-pyplot.plot(y_scaler.inverse_transform(y_scaled), '.', color="green")
 pyplot.plot(y_scaler.inverse_transform(predicted), color="red")
-pyplot.legend(('Predicted 256QAM', 'Data'), loc='lower right')
+pyplot.plot(y_scaler.inverse_transform(y_scaled), color="green")
+pyplot.legend(('Predicted', 'Data'), loc='upper right')
 pyplot.show()

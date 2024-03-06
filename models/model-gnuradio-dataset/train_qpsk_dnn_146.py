@@ -62,10 +62,10 @@ model.fit(X_scaled, y_scaled, epochs=2500, batch_size=2, callbacks=[tensorboard_
 
 # Serialize model to JSON
 model_json = model.to_json()
-with open("model_qpsk_144d.json", "w") as json_file:
+with open("model_qpsk_146d.json", "w") as json_file:
     json_file.write(model_json)
 # serialize weights to HDF5
-model.save_weights("model_qpsk_144d.h5")
+model.save_weights("model_qpsk_146d.h5")
 print("Saved model to disk")
 
 # Predict the response variable with new data
